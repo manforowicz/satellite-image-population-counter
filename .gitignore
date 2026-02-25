@@ -2,8 +2,11 @@
 *.zip
 *.tif
 *.tif.ovr
+*.csv
 *.xlsx
 *.pdf
+*.jpg
+
 
 # Python
 __pycache__
