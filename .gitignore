@@ -1,0 +1,10 @@
+# Large dataset files
+*.zip
+*.tif
+*.tif.ovr
+*.xlsx
+*.pdf
+
+# Python
+__pycache__
+venv
