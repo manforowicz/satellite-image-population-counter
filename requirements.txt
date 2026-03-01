@@ -2,8 +2,5 @@ rasterio
 numpy
 pandas
 requests
-pyproj
-shapely
 tqdm
 pillow
-mercantile

@@ -1,4 +1,9 @@
-# Large dataset files
+google_static_maps_key.txt
+dataset
+test_dataset
+
+
+# Large files
 *.zip
 *.tif
 *.tif.ovr
