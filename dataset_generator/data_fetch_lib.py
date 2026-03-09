@@ -106,7 +106,6 @@ def download_satellite_image(
         Center crops a square image by scale_factor, and rescales the result so its
         a square with `out_px_width`
         """
-
         w, h = img.size
         if w != h:
             raise RuntimeError("can only center crop a square image")

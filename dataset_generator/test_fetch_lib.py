@@ -12,11 +12,10 @@ First image is ocean, and second image moves east to downtown.
 Third image is ocean, and fourth image moves south to suburbs.
 """
 
-OUTPUT_DIR = "test_dataset"
 
-if __name__ == "__main__":
+def test_fetch_lib(output_dir: str = "test_dataset"):
     np.random.seed(42)
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
     records = []
 
@@ -41,12 +40,10 @@ if __name__ == "__main__":
 
         filename = f"{center_lat:.6f}_{center_lon:.6f}_{meter_width}m".replace(".", "-")
         filename = f"{filename}.jpg"
-        img.save(os.path.join(OUTPUT_DIR, filename), quality=95)
+        img.save(os.path.join(output_dir, filename), quality=95)
 
         pop_dict["image_filename"] = filename
         records.append(pop_dict)
 
     df = pd.DataFrame(records)
-    df.to_csv(os.path.join(OUTPUT_DIR, "metadata.csv"), index=False)
-
-    print("Total samples:", len(df))
+    df.to_csv(os.path.join(output_dir, "metadata.csv"), index=False)

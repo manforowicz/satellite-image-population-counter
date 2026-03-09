@@ -6,19 +6,15 @@ import pandas as pd
 from tqdm import tqdm
 import data_fetch_lib
 
-OUTPUT_DIR = "dataset"
-SAMPLE_COUNT = 10
-
-if __name__ == "__main__":
+def generate_dataset(sample_count, output_dir):
     np.random.seed(42)
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
     records = []
     accepted = 0
 
-    with tqdm(total=SAMPLE_COUNT) as pbar:
-        while accepted < SAMPLE_COUNT:
-
+    with tqdm(total=sample_count) as pbar:
+        while accepted < sample_count:
             # Choose random location and size
             center_lat = random.uniform(-70, 70)
             center_lon = random.uniform(-180, 180)
@@ -46,7 +42,7 @@ if __name__ == "__main__":
                 ".", "-"
             )
             filename = f"{filename}.jpg"
-            img.save(os.path.join(OUTPUT_DIR, filename), quality=95)
+            img.save(os.path.join(output_dir, filename), quality=95)
 
             pop_dict["image_filename"] = filename
             records.append(pop_dict)
@@ -55,6 +51,6 @@ if __name__ == "__main__":
             pbar.update(1)
 
     df = pd.DataFrame(records)
-    df.to_csv(os.path.join(OUTPUT_DIR, "metadata.csv"), index=False)
+    df.to_csv(os.path.join(output_dir, "metadata.csv"), index=False)
 
     print("Total samples:", len(df))
