@@ -6,12 +6,14 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import models
 import json
 
+from tqdm import tqdm
+
 from loader import PopulationDataset
 
 
-def train():
+def train(dir):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Training model on: '{device}'")
+    print(f"Training on device: '{device}'")
 
     # pretrained ResNet-50,
     # with final fully connected layer
@@ -21,12 +23,14 @@ def train():
     model.fc = nn.Linear(num_features, 1)
     model = model.to(device)
 
+    dataset_dir = os.path.join(dir, "dataset")
+
     train_dataset = PopulationDataset(
-        dir="/content/cse_493g1_final_project/dataset",
+        dir=dataset_dir,
         split="train",
     )
     val_dataset = PopulationDataset(
-        dir="/content/cse_493g1_final_project/dataset",
+        dir=dataset_dir,
         split="val",
     )
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
@@ -44,7 +48,8 @@ def train():
         model.train()
         train_loss = 0.0
 
-        for images, targets in train_loader:
+        print(f"Epoch {epoch}/{num_epochs}")
+        for images, targets in tqdm(train_loader):
             images = images.to(device)
             targets = targets.to(device).unsqueeze(1)  # (batch, 1)
 
@@ -76,13 +81,11 @@ def train():
         val_loss /= len(val_loader.dataset)
         history["val_loss"].append(val_loss)
 
-        print(
-            f"Epoch [{epoch+1}/{num_epochs}] "
-            f"Train Loss: {train_loss:.4f} "
-            f"Val Loss: {val_loss:.4f}"
-        )
+        print(f"Train Loss: {train_loss:.4f}")
+        print(f"Val Loss: {val_loss:.4f}")
 
-    os.makedirs("results", exist_ok=True)
-    torch.save(model.state_dict(), "results/resnet50_regression.pth")
-    with open("results/training_history.json", "w") as f:
+    output_dir = os.path.join(dir, "results")
+    os.makedirs(output_dir, exist_ok=True)
+    torch.save(model.state_dict(), os.path.join(output_dir, "my_model.pth"))
+    with open(os.path.join(output_dir, "training_history.json"), "w") as f:
         json.dump(history, f)
