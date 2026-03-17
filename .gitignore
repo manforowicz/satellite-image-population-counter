@@ -9,7 +9,6 @@ test_dataset
 *.tif.ovr
 *.csv
 *.xlsx
-*.pdf
 *.jpg
 
 
