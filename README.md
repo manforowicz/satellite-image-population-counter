@@ -1,5 +1,7 @@
 # ResNet satellite image population estimator
 
+My final project for CSE 493G1 (Deep Learning) taken at the University of Washington.
+
 ## Procedure
 
 ### 1. Download population count dataset
@@ -12,12 +14,4 @@
 - Coordinate system: WGS84
 - Extract zip to directory: `ghsl_data`
 
-### 2. Prepare dataset
-
-```
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt
-python3 generate_dataset.py
-```
-
+### 2. Follow the steps in the ipynb

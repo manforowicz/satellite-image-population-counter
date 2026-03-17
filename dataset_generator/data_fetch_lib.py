@@ -17,7 +17,7 @@ from io import BytesIO
 # Extract zip to directory: `ghsl_data`
 GHSL_TIF = "ghsl_data/GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0.tif"
 OUTPUT_DIR = "dataset"
-GOOGLE_STATIC_MAPS_KEY_PATH = "dataset_generator/google_static_maps_key.txt"
+GOOGLE_STATIC_MAPS_KEY_PATH = "google_static_maps_key.txt"
 
 
 google_static_maps_key = Path(GOOGLE_STATIC_MAPS_KEY_PATH).read_text().strip()

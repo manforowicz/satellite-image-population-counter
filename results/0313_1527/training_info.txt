@@ -1,0 +1,9 @@
+Training Configuration
+    ----------------------
+    learning_rate   : 2.0000e-03
+    weight_decay    : 0.0000e+00
+    num_epochs      : 15
+    dropout_prob    : 0.0000e+00
+    train_body      : True
+
+Everything starting at layer3 is unfrozen.
